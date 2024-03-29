@@ -4,7 +4,6 @@ orbs:
   path-filtering: circleci/path-filtering@1.0.0
 
 workflows:
-  version: 2
   generating-config:
     jobs:
       - path-filtering/filter:
