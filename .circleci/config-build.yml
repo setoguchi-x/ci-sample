@@ -16,6 +16,8 @@ jobs:
       - image: cimg/python:3.9
     parallelism: 15
     parameters:
+      name:
+        type: string
       env:
         type: string
     environment:
@@ -25,7 +27,7 @@ jobs:
       - checkout
       - run:
           name: Deploy duffy-batch-commission
-          command: echo "deploy batch"
+          command: echo "deploy batch" << parameters.env >>  << parameters.name >>
 
   deploy-batch-end-notify:
     docker:
@@ -37,7 +39,7 @@ jobs:
       - checkout
       - run:
           name: deploy-batch-end-notify
-          command: echo "notify"
+          command: echo "notify" << parameters.env >>  << parameters.name >>
 
 
 workflows:
@@ -46,12 +48,12 @@ workflows:
     jobs:
       - deploy-batch:
           name: dev-duffy-batch-commission
-          env: dev
+          env: always
       - deploy-batch-end-notify:
           requires:
             - dev-duffy-batch-commission
           name: dev-duffy-batch-commission-end-notify
-          env: dev
+          env: always
   deploy-dev:
     when: << pipeline.parameters.build-dev-env >>
     jobs:
