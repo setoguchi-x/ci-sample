@@ -42,6 +42,16 @@ jobs:
 
 workflows:
   version: 2
+  deploy-always:
+    jobs:
+      - deploy-batch:
+          name: dev-duffy-batch-commission
+          env: dev
+      - deploy-batch-end-notify:
+          requires:
+            - dev-duffy-batch-commission
+          name: dev-duffy-batch-commission-end-notify
+          env: dev
   deploy-dev:
     when: << pipeline.parameters.build-dev-env >>
     jobs:
