@@ -9,11 +9,16 @@ workflows:
   generating-config:
     jobs:
       - path-filtering/filter:
-            base-revision: main
-            config-path: .circleci/config-build.yml
-            mapping: |
-              env/dev/* build-dev-env true
-              env/stg/* build-stg-env true
+          base-revision: main
+          config-path: .circleci/config-build.yml
+          mapping: |
+            env/dev/* build-dev-env true
+            env/stg/* build-stg-env true
+          filters:
+            tags:
+              only: /^v.*_commission-register.*/
+            branches:
+              ignore: /.*/
 #      - deploy-batch:
 #          name: dev-duffy-batch-commission
 #          env: dev
