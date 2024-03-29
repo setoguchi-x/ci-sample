@@ -10,9 +10,10 @@ workflows:
     jobs:
       - path-filtering/filter:
             base-revision: main
+            config-path: .circle/build-code-config.yml
             mapping: |
-              env/dev/* build-dev-env true .circleci/build-code-config.yml
-              env/stg/* build-stg-env true .circleci/build-docs-config.yml
+              env/dev/* build-dev-env true
+              env/stg/* build-stg-env true
 #      - deploy-batch:
 #          name: dev-duffy-batch-commission
 #          env: dev
