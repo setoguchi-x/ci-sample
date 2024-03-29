@@ -66,7 +66,7 @@ workflows:
             branches:
               ignore: /.*/
   deploy-stg:
-    when: << pipeline.parameters.build-dev-stg >>
+    when: << pipeline.parameters.build-stg-env >>
     jobs:
       - deploy-batch:
           name: dev-duffy-batch-commission
