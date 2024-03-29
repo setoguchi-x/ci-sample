@@ -1,43 +1,17 @@
-
 version: 2.1
 
-
-jobs:
-  deploy-batch:
-    docker:
-      - image: cimg/python:3.9
-    parallelism: 15
-    parameters:
-      env:
-        type: string
-    environment:
-      AWS_RETRY_MODE: standard
-      AWS_MAX_ATTEMPTS: 17
-    steps:
-      - checkout
-      - run:
-          name: Deploy duffy-batch-commission
-#          working_directory: aws/shell
-          command: echo "deploy batch"
-
-  deploy-batch-end-notify:
-    docker:
-      - image: cimg/python:3.9
-    parameters:
-      env:
-        type: string
-    steps:
-      - checkout
-      - run:
-          name: deploy-batch-end-notify
-          command: echo "notify"
-
+orbs:
+  path-filtering: circleci/path-filtering@1.0.0
 
 workflows:
   version: 2
-  # deploy dev
-  deploy-dev:
+  generating-config:
     jobs:
+      - path-filtering/filter:
+            base-revision: main
+            mapping: |
+              env/dev/* deploy-dev true .circleci/build-code-config.yml
+              env/stg/* deploy-stg true .circleci/build-docs-config.yml
       - deploy-batch:
           name: dev-duffy-batch-commission
           env: dev
