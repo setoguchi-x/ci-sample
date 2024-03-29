@@ -10,7 +10,7 @@ workflows:
     jobs:
       - path-filtering/filter:
             base-revision: main
-            config-path: .circle/config-build.yml
+            config-path: .circleci/config-build.yml
             mapping: |
               env/dev/* build-dev-env true
               env/stg/* build-stg-env true
