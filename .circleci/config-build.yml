@@ -25,7 +25,6 @@ jobs:
       - checkout
       - run:
           name: Deploy duffy-batch-commission
-#          working_directory: aws/shell
           command: echo "deploy batch"
 
   deploy-batch-end-notify:
@@ -43,28 +42,17 @@ jobs:
 
 workflows:
   version: 2
-  # deploy dev
   deploy-dev:
     when: << pipeline.parameters.build-dev-env >>
     jobs:
       - deploy-batch:
           name: dev-duffy-batch-commission
           env: dev
-#          filters:
-#            tags:
-#              only: /^v.*_commission-register.*/
-#            branches:
-#              ignore: /.*/
       - deploy-batch-end-notify:
           requires:
             - dev-duffy-batch-commission
           name: dev-duffy-batch-commission-end-notify
           env: dev
-#          filters:
-#            tags:
-#              only: /^v.*_commission-register.*/
-#            branches:
-#              ignore: /.*/
   deploy-stg:
     when: << pipeline.parameters.build-stg-env >>
     jobs:

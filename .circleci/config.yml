@@ -19,21 +19,3 @@ workflows:
               ignore: /.*/
             branches:
               only: main
-#      - deploy-batch:
-#          name: dev-duffy-batch-commission
-#          env: dev
-#          filters:
-#            tags:
-#              only: /^v.*_commission-register.*/
-#            branches:
-#              ignore: /.*/
-#      - deploy-batch-end-notify:
-#          requires:
-#            - dev-duffy-batch-commission
-#          name: dev-duffy-batch-commission-end-notify
-#          env: dev
-#          filters:
-#            tags:
-#              only: /^v.*_commission-register.*/
-#            branches:
-#              ignore: /.*/
