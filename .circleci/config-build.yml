@@ -57,6 +57,7 @@ workflows:
             - dev-duffy-batch-commission
           name: dev-duffy-batch-commission-end-notify
           env: always
+          app: commission-register
   deploy-dev:
     when: << pipeline.parameters.build-dev-env >>
     jobs:
