@@ -1,6 +1,14 @@
 
 version: 2.1
 
+parameters:
+  build-dev-env:
+    type: boolean
+    default: false
+  build-stg-env:
+    type: boolean
+    default: false
+
 
 jobs:
   deploy-batch:
@@ -37,6 +45,7 @@ workflows:
   version: 2
   # deploy dev
   deploy-dev:
+    when: << pipeline.parameters.build-dev-env >>
     jobs:
       - deploy-batch:
           name: dev-duffy-batch-commission
@@ -57,6 +66,7 @@ workflows:
             branches:
               ignore: /.*/
   deploy-stg:
+    when: << pipeline.parameters.build-dev-stg >>
     jobs:
       - deploy-batch:
           name: dev-duffy-batch-commission
