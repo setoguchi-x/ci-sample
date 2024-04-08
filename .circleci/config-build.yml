@@ -27,7 +27,10 @@ jobs:
       - checkout
       - run:
           name: Deploy duffy-batch-commission
-          command: echo "deploy batch" << parameters.env >>  << parameters.app >>
+          command: echo "deploy batch 1" << parameters.env >>  << parameters.app >>
+      - run:
+          name: Deploy duffy-batch-commission
+          command: echo "deploy batch 2" << parameters.env >>  << parameters.app >>
 
   deploy-batch-end-notify:
     docker:
